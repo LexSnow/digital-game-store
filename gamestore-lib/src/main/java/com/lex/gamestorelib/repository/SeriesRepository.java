@@ -1,10 +1,9 @@
 package com.lex.gamestorelib.repository;
 
-import com.lex.gamestorelib.model.entity.Game;
+import com.lex.gamestorelib.model.entity.Series;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
-public interface GameRepository extends JpaRepository<Game, Integer> {
+public interface SeriesRepository extends JpaRepository<Series, Integer> {
 }
