@@ -1,6 +1,6 @@
 CREATE TABLE Address
 (
-    id           int NOT NULL,
+    id           int NOT NULL AUTO_INCREMENT,
     street       nvarchar(50) NOT NULL,
     city         nvarchar(100) NOT NULL,
     country      nvarchar(100) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE Address
 );
 CREATE TABLE Company
 (
-    id         int NOT NULL,
+    id         int NOT NULL AUTO_INCREMENT,
     name       nvarchar(500) NOT NULL,
     address_id int NOT NULL,
     CONSTRAINT Company_pk PRIMARY KEY (id),
@@ -19,19 +19,19 @@ CREATE TABLE Company
 );
 CREATE TABLE Series
 (
-    id    int NOT NULL,
+    id    int NOT NULL AUTO_INCREMENT,
     title nvarchar(300) NOT NULL,
     CONSTRAINT Series_pk PRIMARY KEY (id)
 );
 CREATE TABLE Game
 (
-    id           int           NOT NULL,
+    id           int           NOT NULL AUTO_INCREMENT,
     title        nvarchar(300) NOT NULL,
     release_date date          NOT NULL,
     price        numeric(6, 2) NOT NULL,
     currency     nvarchar(3) NOT NULL,
-    developer_id int           NOT NULL,
-    publisher_id int           NOT NULL,
+    developer_id int           NULL,
+    publisher_id int           NULL,
     platform nvarchar(50) NOT NULL,
     series_id    int          NULL,
     CONSTRAINT Game_pk PRIMARY KEY (id),

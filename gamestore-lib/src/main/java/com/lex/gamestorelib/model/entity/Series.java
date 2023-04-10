@@ -12,7 +12,7 @@ import java.util.Set;
 @Setter
 public class Series {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     @Column(name = "title")
     String title;

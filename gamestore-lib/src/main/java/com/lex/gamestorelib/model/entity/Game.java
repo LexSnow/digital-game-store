@@ -16,8 +16,8 @@ import java.util.Collection;
 @Setter
 public class Game {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private  int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @Column(name = "title")
     private  String title;
     @Column(name = "release_date")
@@ -28,10 +28,10 @@ public class Game {
     @Column(name = "currency")
     private Currency currency;
     @ManyToOne
-    @JoinColumn(name = "developer_id", nullable = false)
+    @JoinColumn(name = "developer_id", nullable = true)
     private Company developer;
     @ManyToOne
-    @JoinColumn(name = "publisher_id", nullable = false)
+    @JoinColumn(name = "publisher_id", nullable = true)
     private  Company publisher;
     @Enumerated(EnumType.STRING)
     @Column(name = "platform")

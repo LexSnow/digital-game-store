@@ -1,33 +1,55 @@
 package com.lex.gamestoreapp.controller;
 
 import com.lex.gamestorelib.model.dto.GameDTO;
+import com.lex.gamestorelib.model.dto.GamePriceUpdateDTO;
 import com.lex.gamestorelib.model.dto.mapper.GameMapper;
 import com.lex.gamestorelib.model.entity.Game;
 import com.lex.gamestorelib.model.exceptions.GameNotFoundException;
 import com.lex.gamestorelib.service.GameService;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/games")
 public class GameController {
 
-    @Autowired
     private GameService gameService;
     private final GameMapper gameMapper = Mappers.getMapper(GameMapper.class);
-    @GetMapping("/games")
-    List<GameDTO> getAllGames(){
+
+    @Autowired
+    public GameController(GameService gameService) {
+        this.gameService = gameService;
+    }
+
+    @GetMapping()
+    List<GameDTO> getAllGames() {
         return gameMapper.gamesToGameDTOs(gameService.getGames());
     }
-    @GetMapping("/games/{id}")
+
+    @GetMapping("/{id}")
     GameDTO getGame(@PathVariable Integer id) throws GameNotFoundException {
         return gameMapper.gameToGameDTO(gameService.getGame(id));
     }
 
-    @PostMapping("/games")
-    void createGame(@RequestBody Game game){
+    @PostMapping("/admin")
+    ResponseEntity<String> addGame(@RequestBody Game game) {
         gameService.createGame(game);
+        return ResponseEntity.ok("The game has been added.");
+    }
+
+    @DeleteMapping("/admin/{id}")
+    ResponseEntity<String> deleteGame(@PathVariable Integer id) {
+        gameService.deleteGame(id);
+        return ResponseEntity.ok("The game has been deleted.");
+    }
+    @PatchMapping("/admin/{id}")
+    ResponseEntity<String> updateGamePrice(@PathVariable Integer id, @RequestBody GamePriceUpdateDTO gamePriceUpdateDTO) throws GameNotFoundException {
+        gameService.updateGamePrice(id, gamePriceUpdateDTO);
+        return ResponseEntity.ok("The price has been updated");
     }
 }
