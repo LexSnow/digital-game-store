@@ -36,8 +36,8 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth ->
                         auth
                                 .requestMatchers(antMatcher("/authenticate")).permitAll()
-                                .requestMatchers(antMatcher("/games")).hasAuthority("USER")
-                                .requestMatchers(antMatcher("/admin")).hasAuthority("ADMIN")
+                                .requestMatchers(antMatcher("/games/**")).hasAnyAuthority("USER", "ADMIN")
+                                .requestMatchers(antMatcher("**/admin/**")).hasAuthority("ADMIN")
                                 .anyRequest().authenticated())
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

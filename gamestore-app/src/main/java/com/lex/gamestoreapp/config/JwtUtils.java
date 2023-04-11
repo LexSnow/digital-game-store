@@ -6,8 +6,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,12 +18,13 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtils {
-    private final KeyPair pair;
+    private static final String secretString = "c3VwZXJTZWN1cmVBcGlUaGF0SXNTdXBlclNlY3VyZQ==";
+    private final Key secret;
+    private final SignatureAlgorithm signatureAlgorithm;
 
-    public JwtUtils() throws NoSuchAlgorithmException {
-        KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
-        generator.initialize(2048);
-        this.pair = generator.generateKeyPair();
+    public JwtUtils() {
+        this.signatureAlgorithm = SignatureAlgorithm.HS256;
+        this.secret = new SecretKeySpec(secretString.getBytes(StandardCharsets.UTF_8), signatureAlgorithm.getJcaName());
     }
 
     public String generateToken(UserDetails userDetails){
@@ -46,7 +48,7 @@ public class JwtUtils {
     }
 
     public Claims extractAllClaims(String token){
-        return Jwts.parserBuilder().setSigningKey(pair.getPrivate()).build().parseClaimsJwt(token).getBody();
+        return Jwts.parserBuilder().setSigningKey(this.secret).build().parseClaimsJws(token).getBody();
     }
 
     public boolean hasClaim(String token, String claimName) {
@@ -60,7 +62,7 @@ public class JwtUtils {
                 .claim("authorities", userDetails.getAuthorities())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24)))
-                .signWith(this.pair.getPrivate(), SignatureAlgorithm.HS256).compact();
+                .signWith(this.secret, SignatureAlgorithm.HS256).compact();
     }
     public Boolean isTokenExpired(String token){
         return extractExpiration(token).before(new Date());

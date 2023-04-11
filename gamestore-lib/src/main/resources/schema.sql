@@ -62,10 +62,10 @@ CREATE TABLE Game_Genre
     FOREIGN KEY (game_id)
         REFERENCES Game (id)
 );
-CREATE TABLE USER_AUTHORITY
+CREATE TABLE User_Role
 (
 user_id int NOT NULL,
-authority nvarchar(50) NOT NULL,
+role nvarchar(50) NOT NULL,
 FOREIGN KEY (user_id)
 REFERENCES Users (id)
 );
