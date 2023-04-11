@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.Collection;
 
 @Entity
 @Table(name = "address")
@@ -25,5 +25,5 @@ public class Address {
     @Column(name = "postal_code")
     private String postalCode;
     @OneToMany(mappedBy = "address")
-    private Set<Company> companySet;
+    private Collection<Company> companySet;
 }
