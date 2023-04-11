@@ -1,3 +1,9 @@
+CREATE TABLE Users (
+id           int NOT NULL AUTO_INCREMENT,
+   username VARCHAR(60) NOT NULL ,
+    password VARCHAR(45) NOT NULL ,
+   CONSTRAINT Users_pk PRIMARY KEY (id)
+);
 CREATE TABLE Address
 (
     id           int NOT NULL AUTO_INCREMENT,
@@ -55,4 +61,11 @@ CREATE TABLE Game_Genre
     genre   nvarchar(50) NOT NULL,
     FOREIGN KEY (game_id)
         REFERENCES Game (id)
+);
+CREATE TABLE User_Role
+(
+user_id int NOT NULL,
+role nvarchar(50) NOT NULL,
+FOREIGN KEY (user_id)
+REFERENCES Users (id)
 );

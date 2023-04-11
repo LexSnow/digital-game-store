@@ -1,3 +1,11 @@
+INSERT INTO users(username, password)
+VALUES('user@gmail.com','passwordUser');
+INSERT INTO users(username, password)
+VALUES('admin@gmail.com','passwordAdmin');
+INSERT INTO user_role(user_id, role)
+VALUES(1, 'USER');
+INSERT INTO user_role(user_id, role)
+VALUES(2, 'ADMIN');
 INSERT INTO address(street, city, country, house_number, postal_code)
 VALUES ('150th Ave NE', 'Redmond', 'USA', '4600', 'WA 98052');
 INSERT INTO address(street, city, country, house_number, postal_code)

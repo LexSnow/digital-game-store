@@ -8,7 +8,6 @@ import com.lex.gamestorelib.model.exceptions.GameNotFoundException;
 import com.lex.gamestorelib.service.GameService;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +17,7 @@ import java.util.List;
 @RequestMapping("/games")
 public class GameController {
 
-    private GameService gameService;
+    private final GameService gameService;
     private final GameMapper gameMapper = Mappers.getMapper(GameMapper.class);
 
     @Autowired
