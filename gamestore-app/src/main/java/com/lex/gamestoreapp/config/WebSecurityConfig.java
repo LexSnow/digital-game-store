@@ -38,8 +38,8 @@ public class WebSecurityConfig {
                         auth
                                 .requestMatchers(antMatcher("/h2-console/**")).permitAll()
                                 .requestMatchers(antMatcher("/authenticate")).permitAll()
-                                .requestMatchers(antMatcher("/games/**")).hasAnyAuthority("USER", "ADMIN")
-                                .requestMatchers(antMatcher("**/admin/**")).hasAuthority("ADMIN")
+                                .requestMatchers(antMatcher("/game/games/**")).hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                                .requestMatchers(antMatcher("/game/admin/**")).hasAuthority("ROLE_ADMIN")
                                 .anyRequest().authenticated())
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
