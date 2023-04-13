@@ -46,11 +46,11 @@ authorities which give them access to different endpoints.</p>
 <h1>Game Controller</h1>
 <p>The game controller is a REST controller that serves the response in a json format.</p>
 <p>Endpoints available for User1 and User2</p>
-<p>GET - /games - Returns a List object of GameDTOs</p>
-<p>GET - /games/{id} - Returns a specific GameDTO. Throws GameNotFoundException</p>
+<p>GET - /game/games - Returns a List object of GameDTOs</p>
+<p>GET - /game/games/{id} - Returns a specific GameDTO. Throws GameNotFoundException</p>
 <p></p>
 <p>Endpoints available for User2</p>
-<p>POST - /games/admin - Creates new game. Sample json:</p>
+<p>POST - /game/admin - Creates new game. Sample json:</p>
 '''json
 {
 "title" : "abc",
@@ -61,8 +61,8 @@ authorities which give them access to different endpoints.</p>
 "genres" : ["ROLE_PLAYING"]
 }
 '''
-<p>DELETE - /games/admin/{id} - Deletes a Game entity from db</p>
-<p>PATCH - /games/admin/{id} - Updates the price and currency of the game. Sample json:</p>
+<p>DELETE - /game/admin/{id} - Deletes a Game entity from db</p>
+<p>PATCH - /game/admin/{id} - Updates the price and currency of the game. Sample json:</p>
 '''json
 {
 "price" : 20,
