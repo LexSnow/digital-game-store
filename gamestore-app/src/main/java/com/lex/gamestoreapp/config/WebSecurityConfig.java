@@ -29,12 +29,14 @@ public class WebSecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
     private final UserRepository userRepository;
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeHttpRequests(auth ->
                         auth
+                                .requestMatchers(antMatcher("/h2-console/**")).permitAll()
                                 .requestMatchers(antMatcher("/authenticate")).permitAll()
                                 .requestMatchers(antMatcher("/games/**")).hasAnyAuthority("USER", "ADMIN")
                                 .requestMatchers(antMatcher("**/admin/**")).hasAuthority("ADMIN")
@@ -44,6 +46,7 @@ public class WebSecurityConfig {
                 .and()
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        http.headers().frameOptions().disable();
         return http.build();
     }
 

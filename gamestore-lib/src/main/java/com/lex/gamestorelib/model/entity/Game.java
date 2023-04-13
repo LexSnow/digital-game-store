@@ -4,8 +4,7 @@ import com.lex.gamestorelib.model.Currency;
 import com.lex.gamestorelib.model.GamePlatform;
 import com.lex.gamestorelib.model.Genre;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -14,6 +13,9 @@ import java.util.Collection;
 @Table(name = "game")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

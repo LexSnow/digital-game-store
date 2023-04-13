@@ -1,9 +1,11 @@
 package com.lex.gamestorelib.model.dto.mapper;
 
 import com.lex.gamestorelib.model.dto.GameDTO;
+import com.lex.gamestorelib.model.dto.GamePriceUpdateDTO;
 import com.lex.gamestorelib.model.entity.Game;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -14,4 +16,5 @@ public interface GameMapper {
     @Mapping(target = "series", source = "series.title")
     GameDTO gameToGameDTO(Game game);
     List<GameDTO> gamesToGameDTOs(List<Game> games);
+    void update (@MappingTarget Game game, GamePriceUpdateDTO gamePriceUpdateDTO);
 }

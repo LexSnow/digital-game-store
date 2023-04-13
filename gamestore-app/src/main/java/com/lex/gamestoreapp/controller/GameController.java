@@ -6,24 +6,20 @@ import com.lex.gamestorelib.model.dto.mapper.GameMapper;
 import com.lex.gamestorelib.model.entity.Game;
 import com.lex.gamestorelib.model.exceptions.GameNotFoundException;
 import com.lex.gamestorelib.service.GameService;
+import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/games")
 public class GameController {
 
     private final GameService gameService;
     private final GameMapper gameMapper = Mappers.getMapper(GameMapper.class);
-
-    @Autowired
-    public GameController(GameService gameService) {
-        this.gameService = gameService;
-    }
 
     @GetMapping()
     List<GameDTO> getAllGames() {
